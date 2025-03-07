@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form method="post" id="predictionForm">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-field">
+                        {{ form.gender.label_tag }} {{ form.gender }}
+                    </div>
+                    <div class="form-field">
+                        {{ form.age.label_tag }} {{ form.age }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        {{ form.hypertension.label_tag }} {{ form.hypertension }}
+                    </div>
+                    <div class="form-field">
+                        {{ form.bmi.label_tag }} {{ form.bmi }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        {{ form.heart_disease.label_tag }} {{ form.heart_disease }}
+                    </div>
+                    <div class="form-field">
+                        {{ form.HbA1c_level.label_tag }} {{ form.HbA1c_level }}
+                    </div>
+                </div>
+                <div class="form-field2">
+                    {{ form.smoking_history.label_tag }} {{ form.smoking_history }}
+                </div>
+                <div class="form-field2">
+                    {{ form.blood_glucose_level.label_tag }} {{ form.blood_glucose_level }}
+                </div>
+                <button type="submit">Predict</button>
+            </form>
+            <div class="loader" id="loader">Please Wait...</div>
+        </div>
+        <div class="image-container2">
+            {% if prediction %}
+            <div class="prediction-result" id="predictionResult">
+                <strong>Prediction:</strong> {{ prediction }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="toast" id="toastMessage"></div>
+    <script src="{% static 'js/scripts.js' %}"></script>
+
+   
+</body>
+</html>
